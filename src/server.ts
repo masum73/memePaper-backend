@@ -9,6 +9,3 @@ async function main() {
   });
 }
 main();
-
-// adminMemePaper;
-// YfMiEicISyX5a9HR;
