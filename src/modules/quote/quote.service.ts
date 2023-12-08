@@ -11,6 +11,11 @@ const getAllQuotesFromDB = async () => {
   return result;
 };
 
+const getRandomQuotesFromDB = async () => {
+  const result = await Quote.aggregate([{ $sample: { size: 1 } }]);
+  return result;
+};
+
 const getSingleQuoteFromDB = async (id: number) => {
   const result = await Quote.findOne({ id: id });
   return result;
@@ -32,6 +37,7 @@ const deleteQuote = async (id: number) => {
 export const QuoteServices = {
   createQuoteIntoDB,
   getAllQuotesFromDB,
+  getRandomQuotesFromDB,
   getSingleQuoteFromDB,
   updateQuoteIntoDB,
   deleteQuote,

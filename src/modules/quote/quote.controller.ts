@@ -44,7 +44,25 @@ const getAllQuotes = async (req: Request, res: Response) => {
     });
   }
 };
-
+const getRandomQuotes = async (req: Request, res: Response) => {
+  try {
+    const result = await QuoteServices.getRandomQuotesFromDB();
+    res.status(200).json({
+      success: true,
+      message: "Randomly Quote fetched successfully!",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(404).json({
+      success: false,
+      message: error?.message,
+      error: {
+        code: 404,
+        description: "Something went wrong!",
+      },
+    });
+  }
+};
 const getSingleQuote = async (req: Request, res: Response) => {
   try {
     const quoteId = parseInt(req.params.id);
@@ -113,6 +131,7 @@ const deleteQuote = async (req: Request, res: Response) => {
 export const QuoteControllers = {
   createQuote,
   getAllQuotes,
+  getRandomQuotes,
   getSingleQuote,
   updateQuote,
   deleteQuote,
